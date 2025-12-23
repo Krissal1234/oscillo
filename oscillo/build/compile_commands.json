@@ -1,0 +1,17 @@
+[
+{
+  "directory": "/home/krissal1234/Documents/projects/oscillo/build",
+  "command": "/usr/bin/c++  -I/home/krissal1234/Documents/projects/oscillo/include -std=gnu++20 -o CMakeFiles/oscillo.dir/src/main.cpp.o -c /home/krissal1234/Documents/projects/oscillo/src/main.cpp",
+  "file": "/home/krissal1234/Documents/projects/oscillo/src/main.cpp"
+},
+{
+  "directory": "/home/krissal1234/Documents/projects/oscillo/build",
+  "command": "/usr/bin/c++  -I/home/krissal1234/Documents/projects/oscillo/include -std=gnu++20 -o CMakeFiles/oscillo.dir/src/evaluator/evaluator.cpp.o -c /home/krissal1234/Documents/projects/oscillo/src/evaluator/evaluator.cpp",
+  "file": "/home/krissal1234/Documents/projects/oscillo/src/evaluator/evaluator.cpp"
+},
+{
+  "directory": "/home/krissal1234/Documents/projects/oscillo/build",
+  "command": "/usr/bin/c++  -I/home/krissal1234/Documents/projects/oscillo/include -std=gnu++20 -o CMakeFiles/oscillo.dir/src/evaluator/lexer.cpp.o -c /home/krissal1234/Documents/projects/oscillo/src/evaluator/lexer.cpp",
+  "file": "/home/krissal1234/Documents/projects/oscillo/src/evaluator/lexer.cpp"
+}
+]
