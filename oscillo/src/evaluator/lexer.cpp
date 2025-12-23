@@ -1,6 +1,5 @@
 #include <iostream>
 #include "lexer.h"
-#include "token.h"
 
 static const std::string operator_list {"+/-*"};
 

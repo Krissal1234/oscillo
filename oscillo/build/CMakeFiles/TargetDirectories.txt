@@ -1,3 +1,0 @@
-/home/krissal1234/Documents/projects/oscillo/build/CMakeFiles/oscillo.dir
-/home/krissal1234/Documents/projects/oscillo/build/CMakeFiles/edit_cache.dir
-/home/krissal1234/Documents/projects/oscillo/build/CMakeFiles/rebuild_cache.dir

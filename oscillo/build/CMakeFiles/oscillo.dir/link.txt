@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/oscillo.dir/src/main.cpp.o CMakeFiles/oscillo.dir/src/evaluator/evaluator.cpp.o CMakeFiles/oscillo.dir/src/evaluator/lexer.cpp.o -o oscillo 
