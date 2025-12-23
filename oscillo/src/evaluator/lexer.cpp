@@ -4,8 +4,10 @@
 static const std::string operator_list {"+/-*"};
 
 
+// Constructor
 Lexer::Lexer(std::string input) : input_str(input) {};
 
+// Lexer commands
 char Lexer::advance() {
     char current = peek();
 
@@ -38,6 +40,7 @@ void Lexer::tokenise() {
         c = advance();
 
         if (is_operator(c)) {
+
         }
 
         if (std::isdigit(c)) {
