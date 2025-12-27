@@ -4,6 +4,7 @@
 enum class TokenType {VARIABLE, LITERAL, OPERATOR, SEPERATOR};
 
 enum class OperatorType {NONE, DIVISION, MULTIPLICATION, ADDITION, SUBTRACTION, CARET};
+enum class SeperatorType {OPEN_BRACKET, CLOSE_BRACKET};
 
 // Base class
 class Token {
@@ -19,12 +20,10 @@ class Token {
 
 // Seperate Token Children 
 class OperandToken : public Token{
-
-    double value {};
-
     public:
-    void print() const override;
     OperandToken(TokenType tok_type, double value);
+    double value {};
+    void print() const override;
 };
 
 
@@ -32,14 +31,19 @@ class OperatorToken : public Token{
     OperatorType op_type;
 
     public:
-     void print() const override;
     OperatorToken(OperatorType op_type);
+     void print() const override;
 };
 
-// class SeperatorToken : Token {
-//
-//
-// };
+class SeperatorToken : public Token {
+    SeperatorType sep_type;
+    
+    public:
+    SeperatorToken(SeperatorType sep_type);
+    void print() const override;
+};
+
 // class FunctionToken : Token{ 
 //
 // };
+//

@@ -46,6 +46,7 @@ int main(int argc, char **argv) {
     Lexer lexer(function);
 
     lexer.tokenise();
+
     lexer.print_tokens_vector();
     
 

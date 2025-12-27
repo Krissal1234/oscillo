@@ -19,6 +19,8 @@ private:
     char peek_next();
     char advance();
     bool is_operator(char c);
+    void handle_digit(char c);
+    // void preprocess_input();
 
 public:
     Lexer(std::string_view input);

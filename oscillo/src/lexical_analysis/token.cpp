@@ -24,7 +24,15 @@ void OperandToken::print() const {
     default:                                std::cout << "[]";
 }
     std::cout << "[" << value << "]" << '\n';
-
 }
 
+SeperatorToken::SeperatorToken(SeperatorType sep_type) : Token(TokenType::SEPERATOR), sep_type(sep_type) {};
+
+void SeperatorToken::print() const {
+    switch(sep_type) {
+        case SeperatorType::OPEN_BRACKET:            std::cout << "[ ( ]" << '\n'; break;
+        case SeperatorType::CLOSE_BRACKET:           std::cout << "[ ) ]" << '\n'; break;
+    default:                                std::cout << "[]";
+}
+}
 
