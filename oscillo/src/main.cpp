@@ -9,36 +9,20 @@
 
 void run_evaluator_tests();
 
-/*
- *
- *input from cin is a functtion in string format
- it will pass through a lexer that will put it in atoken format e.g. {NUMBER, 2.5}
- Then a parser will build an AST tree. this will make it easy to evaluate the function
- once the tree is build we can easily evaluate for multiple values of x
-
- Then we can use ncurser to plot, this will be difficult
- *
- *
- *
-// */
-
-
 std::string split(const std::string& str);
 std::string extract_from_args(int argc, char **argv);
 
 int main(int argc, char **argv) {
-
-    if (argc > 1 && std::string(argv[1]) == "--test") {
-
-        run_evaluator_tests();
-        return 0;
-    }
-    std::string function {};
-
     if (argc >= 5) {
         std::cout << "Too many arguments, Tip: dont use whitespaces" << std::endl;
     }
 
+    if (argc > 1 && std::string(argv[1]) == "--test") {
+        run_evaluator_tests();
+        return 0;
+    }
+
+    std::string function {};
     //extract function std::string, either through splitting a single string or through multiple function arguments
     if (argc == 2) { //one argument so possibly contains double brackets to contain function""
         function = split(argv[1]);
@@ -53,12 +37,6 @@ int main(int argc, char **argv) {
     double ans = e.evaluate(4);
 
     std::cout << "ANS: " <<  ans << '\n';
-
-
-    
-
-
-
     //ncursers stuff
 
   //   struct winsize w;

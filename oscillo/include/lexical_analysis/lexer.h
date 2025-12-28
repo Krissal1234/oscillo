@@ -11,7 +11,7 @@ private:
     std::vector<std::unique_ptr<Token>> tokens;
     
 
-    int curr_pos {};
+    int curr_pos {0};
 
     void reset();
     char peek_current();

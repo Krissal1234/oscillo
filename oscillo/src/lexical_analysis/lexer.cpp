@@ -58,18 +58,28 @@ void Lexer::handle_digit(char c) {
 
     std::string digit_string {c};
 
-    while (std::isdigit(peek_current())) {
-        digit_string += advance();
+
+    while (true) {
+        char curr = peek_current();
+
+        if (std::isdigit(curr) || curr == '.') {
+            digit_string += advance();
+        } else {
+            break;
+        }
     }
 
-    tokens.push_back(TokenFactory::create_operand(TokenType::LITERAL, stoi(digit_string)));
+    tokens.push_back(TokenFactory::create_operand(TokenType::LITERAL, stod(digit_string)));
 }
 
 void Lexer::tokenise() {
     char c = peek_current(); //just peeks, does not move pointer yet
     
     while (c != '\0') {
+
         c = advance();
+        
+        if (std::isspace(c)) continue;
 
         //Operator Check
         std::unordered_map<char,OperatorType>::const_iterator got = operator_list.find(c);
@@ -80,18 +90,24 @@ void Lexer::tokenise() {
 
         //Operand check
         if (c == 'x') {
-            tokens.push_back(TokenFactory::create_operand(TokenType::VARIABLE, 0));
+            tokens.push_back(TokenFactory::create_operand(TokenType::VARIABLE, 0.0));
+            continue;
         }
 
         if (c == '(' || c == ')') {
             tokens.push_back(TokenFactory::create_seperator(c));
+            continue;
         }
 
         //handle digit handles advances 
-        if (std::isdigit(c)) {
+        if (std::isdigit(c) || c == '.') {
             handle_digit(c);
             continue;
         }
+
+        //if code reaches here, we must have an invalid token, the check is to make account for advance() edge case
+        if (c != '\0') throw std::runtime_error("Invalid Token");
+
     }
 
     //constant folding

@@ -8,7 +8,6 @@ Evaluator::Evaluator(std::string_view input) : input_str(input) {
 
     Parser p(l.get_tokens());
 
-
     this->root = p.parse_expression();
 };
 

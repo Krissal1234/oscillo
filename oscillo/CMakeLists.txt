@@ -8,8 +8,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_executable(oscillo
     src/main.cpp
     src/evaluator.cpp
+
     src/lexical_analysis/lexer.cpp
     src/lexical_analysis/token.cpp
+
     src/syntax_analysis/syntax_tree.cpp
     src/syntax_analysis/parser.cpp
 

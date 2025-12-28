@@ -56,7 +56,7 @@ std::unique_ptr<Node> Parser::parse_term() {
         }
 
         advance(); 
-        auto right = parse_term();
+        auto right = parse_factor();
 
         left = std::make_unique<BinOpNode>(std::move(left), std::move(right), op);
     }

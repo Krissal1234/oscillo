@@ -22,11 +22,9 @@ double BinOpNode::evaluate(double x) {
 
 NumNode::NumNode(TokenType type, double value) : tok_type(type), value(value) {};
 
+
 double NumNode::evaluate(double x) {
-    if (tok_type == TokenType::VARIABLE) {
-        return x;
-    }
-    return value;
+    return (tok_type == TokenType::VARIABLE) ? x : value;
 }
 
 
