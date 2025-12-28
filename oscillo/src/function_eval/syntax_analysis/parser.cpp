@@ -24,7 +24,6 @@ Token* Parser::advance() {
 std::unique_ptr<Node> Parser::parse_expression() {
     auto left = parse_term();
 
-    
     while (peek() != nullptr && peek()->get_tok_type() == TokenType::OPERATOR) {
         
         OperatorType op = peek()->get_operator_type();

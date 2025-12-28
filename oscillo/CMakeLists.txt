@@ -7,15 +7,18 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Add the executable
 add_executable(oscillo
     src/main.cpp
-    src/evaluator.cpp
+    src/function_eval/evaluator.cpp
 
-    src/lexical_analysis/lexer.cpp
-    src/lexical_analysis/token.cpp
+    src/function_eval/lexical_analysis/lexer.cpp
+    src/function_eval/lexical_analysis/token.cpp
 
-    src/syntax_analysis/syntax_tree.cpp
-    src/syntax_analysis/parser.cpp
+    src/function_eval/syntax_analysis/syntax_tree.cpp
+    src/function_eval/syntax_analysis/parser.cpp
+
+    src/ui/canvas.cpp
 
     src/tests/evaluator_tests.cpp
+    
 )
 
 # Include the header folder
@@ -23,4 +26,13 @@ target_include_directories(oscillo PUBLIC
     include 
     include/lexical_analysis 
     include/syntax_analysis
+    include/ui
 )
+
+find_package(Curses REQUIRED)
+
+# 2. Include the directories where the header files are
+include_directories(${CURSES_INCLUDE_DIRS})
+
+# 3. Link the library to your executable
+target_link_libraries(oscillo ${CURSES_LIBRARIES})

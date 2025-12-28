@@ -12,7 +12,9 @@ static const std::unordered_map<char, OperatorType> operator_list {
 };
 
 // Constructor
-Lexer::Lexer(std::string_view input) : input_str(input) {};
+Lexer::Lexer(std::string_view input) : input_str(input) {
+    tokens.reserve(input.length());
+};
 
 std::vector<std::unique_ptr<Token>> Lexer::get_tokens() {
     return std::move(tokens);

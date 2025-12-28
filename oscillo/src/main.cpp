@@ -4,8 +4,9 @@
 #include <cstdlib>
 #include <sys/ioctl.h>
 #include "evaluator.h"
-// #include <unistd.h>
-// #include <ncurses.h>
+#include "canvas.h"
+#include <unistd.h>
+#include <ncurses.h>
 
 void run_evaluator_tests();
 
@@ -37,6 +38,21 @@ int main(int argc, char **argv) {
     double ans = e.evaluate(4);
 
     std::cout << "ANS: " <<  ans << '\n';
+
+
+    // initscr();
+    // int y, x;
+    // getmaxyx(stdscr, y, x);
+    //
+    // // Call the constructor with the actual screen size
+    // Canvas c(y, x);
+    //
+    // std::cout << x << ' ' << y << '\n';
+
+
+}
+
+    
     //ncursers stuff
 
   //   struct winsize w;
@@ -53,7 +69,7 @@ int main(int argc, char **argv) {
   // }
 
 
-}
+
 
 std::string split(const std::string& str) {
   std::string result;
