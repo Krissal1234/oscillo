@@ -6,6 +6,9 @@ Token::Token(TokenType tok_type) : tok_type(tok_type) {};
 
 OperatorToken::OperatorToken(OperatorType op_type) : Token(TokenType::OPERATOR), op_type(op_type) {};
 
+OperatorType OperatorToken::get_operator_type() const {
+    return op_type;
+}
 void OperatorToken::print() const {
     switch(op_type) {
         case OperatorType::ADDITION:       std::cout << "[+]" << '\n'; break;
@@ -27,6 +30,10 @@ void OperandToken::print() const {
 }
 
 SeperatorToken::SeperatorToken(SeperatorType sep_type) : Token(TokenType::SEPERATOR), sep_type(sep_type) {};
+
+SeperatorType SeperatorToken::get_seperator_type() const {
+    return sep_type;
+}
 
 void SeperatorToken::print() const {
     switch(sep_type) {

@@ -1,5 +1,4 @@
 #pragma once
-
 #include <vector>
 #include <memory>
 #include "token.h"
@@ -24,6 +23,7 @@ private:
 
 public:
     Lexer(std::string_view input);
+    std::vector<std::unique_ptr<Token>> get_tokens();
     
     void tokenise();
     void print_tokens_vector();

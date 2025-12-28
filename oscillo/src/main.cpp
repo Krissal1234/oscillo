@@ -3,15 +3,16 @@
 #include <sstream>
 #include <cstdlib>
 #include <sys/ioctl.h>
+#include "evaluator.h"
 // #include <unistd.h>
 // #include <ncurses.h>
-#include "lexer.h"
 
+void run_evaluator_tests();
 
 /*
  *
  *input from cin is a functtion in string format
- it will pass through a lexer that will put it in a token format e.g. {NUMBER, 2.5}
+ it will pass through a lexer that will put it in atoken format e.g. {NUMBER, 2.5}
  Then a parser will build an AST tree. this will make it easy to evaluate the function
  once the tree is build we can easily evaluate for multiple values of x
 
@@ -27,6 +28,11 @@ std::string extract_from_args(int argc, char **argv);
 
 int main(int argc, char **argv) {
 
+    if (argc > 1 && std::string(argv[1]) == "--test") {
+
+        run_evaluator_tests();
+        return 0;
+    }
     std::string function {};
 
     if (argc >= 5) {
@@ -42,12 +48,13 @@ int main(int argc, char **argv) {
 
     std::cout << "Function: " << function << '\n';
 
-    
-    Lexer lexer(function);
+    Evaluator e(function);
 
-    lexer.tokenise();
+    double ans = e.evaluate(4);
 
-    lexer.print_tokens_vector();
+    std::cout << "ANS: " <<  ans << '\n';
+
+
     
 
 

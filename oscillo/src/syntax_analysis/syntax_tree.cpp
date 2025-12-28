@@ -1,26 +1,32 @@
 #include "syntax_tree.h"
-
+#include "token.h"
+Node::~Node() {};
 
 //constructors
-BinOpNode::BinOpNode(std::unique_ptr<Node> left, std::unique_ptr<Node> right, std::unique_ptr<OperatorToken> op_token) : left(std::move(left)), right(std::move(right)), op_token(std::move(op_token)) {};
+BinOpNode::BinOpNode(std::unique_ptr<Node> left, std::unique_ptr<Node> right, OperatorType op_type) : left(std::move(left)), right(std::move(right)), op_type(op_type) {};
 
-NumNode::NumNode(std::unique_ptr<OperandToken> token) : value(token->value), token(std::move(token)) {}
-
-Parser::Parser(std::vector<std::unique_ptr<Token>> tokens) : tokens(std::move(tokens)) {};
-
-
-Token* Parser::peek() {
-    if (pos >= tokens.size()) return nullptr;
-    return tokens[pos].get();
+double BinOpNode::evaluate(double x) {
+    double left_val = left->evaluate(x);
+    double right_val = right->evaluate(x);
+    
+    switch (op_type) {
+            case OperatorType::ADDITION:       return left_val + right_val;
+            case OperatorType::SUBTRACTION:    return left_val - right_val;
+            case OperatorType::MULTIPLICATION: return left_val * right_val;
+            case OperatorType::DIVISION:       
+                if (right_val == 0) throw std::runtime_error("Division by zero");
+                return left_val / right_val;
+            default: return 0;
+        }
 }
 
-Token* Parser::advance() {
-    Token* current = peek();
+NumNode::NumNode(TokenType type, double value) : tok_type(type), value(value) {};
 
-    if (current != nullptr) {
-        pos++;
-    } 
-
-    return current;
+double NumNode::evaluate(double x) {
+    if (tok_type == TokenType::VARIABLE) {
+        return x;
+    }
+    return value;
 }
+
 

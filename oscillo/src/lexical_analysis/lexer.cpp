@@ -14,6 +14,9 @@ static const std::unordered_map<char, OperatorType> operator_list {
 // Constructor
 Lexer::Lexer(std::string_view input) : input_str(input) {};
 
+std::vector<std::unique_ptr<Token>> Lexer::get_tokens() {
+    return std::move(tokens);
+}
 // Lexer commands
 char Lexer::advance() {
     char current = peek_current();
@@ -37,9 +40,6 @@ char Lexer::peek_next() {
     return input_str[curr_pos + 1];
 }
 
-void Lexer::reset() {
-    curr_pos = 0;
-}
 
 void Lexer::print_tokens_vector() {
     for (const auto& token : tokens) {
@@ -93,6 +93,7 @@ void Lexer::tokenise() {
             continue;
         }
     }
+
     //constant folding
 }
 

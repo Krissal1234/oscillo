@@ -1,23 +1,17 @@
 #pragma once
+#include "syntax_tree.h"
+#include <memory>
 
-#include <string>
-
-using Function = std::string;
 
 class Evaluator {
 
-    protected:
-    Function input_str;
-
+    std::string_view input_str;
+    std::unique_ptr<Node> root;
 
     public:
-    Evaluator(Function func_input);
+    Evaluator(std::string_view input);
 
-    Function get_function();
-
-    void set_function(Function input);
-
-    double solve(int x);
+    double evaluate(double x);
 
 
 };

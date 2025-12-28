@@ -1,0 +1,98 @@
+#include "parser.h"
+#include <cmath>
+
+
+// Parser functions
+Parser::Parser(std::vector<std::unique_ptr<Token>> tokens) : tokens(std::move(tokens)) {};
+
+
+Token* Parser::peek() {
+    if (pos >= tokens.size()) return nullptr;
+    return tokens[pos].get();
+}
+
+Token* Parser::advance() {
+    Token* current = peek();
+
+    if (current != nullptr) {
+        pos++;
+    } 
+
+    return current;
+}
+
+std::unique_ptr<Node> Parser::parse_expression() {
+    auto left = parse_term();
+
+    
+    while (peek() != nullptr && peek()->get_tok_type() == TokenType::OPERATOR) {
+        
+        OperatorType op = peek()->get_operator_type();
+        
+        if (op != OperatorType::ADDITION && op != OperatorType::SUBTRACTION) {
+            break; 
+        }
+
+        advance(); 
+        auto right = parse_term();
+
+        left = std::make_unique<BinOpNode>(std::move(left), std::move(right), op);
+    }
+
+    return left;
+}
+
+
+std::unique_ptr<Node> Parser::parse_term() {
+
+    auto left = parse_factor();
+
+    while (peek() != nullptr && peek()->get_tok_type() == TokenType::OPERATOR) {
+        
+        OperatorType op = peek()->get_operator_type();
+        
+        if (op != OperatorType::DIVISION && op != OperatorType::MULTIPLICATION) {
+            break; 
+        }
+
+        advance(); 
+        auto right = parse_term();
+
+        left = std::make_unique<BinOpNode>(std::move(left), std::move(right), op);
+    }
+
+    return left;
+}
+
+std::unique_ptr<Node> Parser::parse_factor() {
+    //seperators
+    Token* tk = peek();
+
+    if (!tk) throw std::runtime_error("Unexpected end");
+
+    TokenType tk_type = tk->get_tok_type();
+    //we return a num node if it is a literal
+    if (tk_type == TokenType::LITERAL || tk_type == TokenType::VARIABLE) {
+        OperandToken* operand_tok = static_cast<OperandToken*>(tk);
+
+        double val = operand_tok->value;
+        advance();
+
+        return std::make_unique<NumNode>(tk_type, val);
+    }
+
+
+    //if its a open bracket we have to return the expression
+    if (tk->get_seperator_type() == SeperatorType::OPEN_BRACKET) {
+        advance(); //this eats (
+
+        auto node = parse_expression();
+
+        advance(); //eats )
+
+        return node;
+    }
+
+    throw std::runtime_error("Expected a number or parenthesis, but found something else");
+}
+
