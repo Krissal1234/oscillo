@@ -41,7 +41,8 @@ void Canvas::draw_ncurses() {
             wchar_t c = canvas[row][col];
             if (c != 0) {
                 wchar_t dot {0x2800 + c};
-                setcchar(&complex_char,&dot,WA_NORMAL,0,NULL);
+                setcchar(&complex_char,&dot, WA_NORMAL, 0 ,NULL);
+
                 mvadd_wch(row,col, &complex_char);
             }
         }

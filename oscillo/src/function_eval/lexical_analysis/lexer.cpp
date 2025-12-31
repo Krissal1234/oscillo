@@ -51,6 +51,38 @@ void Lexer::print_tokens_vector() {
     }
 }
 
+
+bool Lexer::needs_implicit_multiplication(char current_c) {
+    if (tokens.empty()) return false;
+
+    TokenType last_type = tokens.back()->get_tok_type();
+    
+    bool last_was_close_bracket = false;
+
+    if (last_type == TokenType::SEPERATOR) {
+        auto sep = static_cast<SeperatorToken*>(tokens.back().get());
+        if (sep->get_seperator_type() == SeperatorType::CLOSE_BRACKET) {
+            last_was_close_bracket = true;
+        }
+    }
+
+    // Case 1: 2x or (x)x or xx
+    if (current_c == 'x') {
+        return (last_type == TokenType::LITERAL || 
+                last_type == TokenType::VARIABLE ||
+                last_was_close_bracket);
+    }
+
+    // Case 2: 2(x) or x(x) or (x)(x)
+    if (current_c == '(') {
+        return (last_type == TokenType::LITERAL || 
+                last_type == TokenType::VARIABLE || 
+                last_was_close_bracket);
+    }
+
+    return false;
+}
+
 void Lexer::handle_digit(char c) {
 
     std::string digit_string {c};
@@ -69,44 +101,33 @@ void Lexer::handle_digit(char c) {
 }
 
 void Lexer::tokenise() {
-    char c = peek_current(); //just peeks, does not move pointer yet
+    char c = peek_current();
     
     while (c != '\0') {
-
         c = advance();
-        
         if (std::isspace(c)) continue;
 
-        //Operator Check
-        std::unordered_map<char,OperatorType>::const_iterator got = operator_list.find(c);
-        if (got != operator_list.end()) {
-            tokens.push_back(TokenFactory::create_operator(got->second));
-            continue;
+        //implicit multiplication like 2x or x(1+2)
+        if (needs_implicit_multiplication(c)) {
+            tokens.push_back(TokenFactory::create_operator(OperatorType::MULTIPLICATION));
         }
 
-        //Operand check
-        if (c == 'x') {
+        if (operator_list.count(c)) { //operator 
+            tokens.push_back(TokenFactory::create_operator(operator_list.at(c)));
+        }
+        else if (c == 'x') { //variable to modify
             tokens.push_back(TokenFactory::create_operand(TokenType::VARIABLE, 0.0));
-            continue;
         }
-
-        if (c == '(' || c == ')') {
+        else if (c == '(' || c == ')') {
             tokens.push_back(TokenFactory::create_seperator(c));
-            continue;
         }
-
-        //handle digit handles advances 
-        if (std::isdigit(c) || c == '.') {
-            handle_digit(c);
-            continue;
+        else if (std::isdigit(c) || c == '.') {
+            handle_digit(c); //this moves the pointer to eat the number
         }
-
-        //if code reaches here, we must have an invalid token, the check is to make account for advance() edge case
-        if (c != '\0') throw std::runtime_error("Invalid Token");
-
+        else if (c != '\0') {
+            throw std::runtime_error("Invalid Token");
+        }
     }
-
-    //constant folding
 }
 
 

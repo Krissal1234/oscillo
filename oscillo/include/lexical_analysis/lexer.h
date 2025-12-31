@@ -19,7 +19,7 @@ private:
     char advance();
     bool is_operator(char c);
     void handle_digit(char c);
-    // void preprocess_input();
+    bool needs_implicit_multiplication(char current_c);
 
 public:
     Lexer(std::string_view input);

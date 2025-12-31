@@ -1,8 +1,6 @@
 #pragma once
 #include "canvas.h"
 
-
-
 struct Pixel {
     int x,y;
     bool on_screen;
@@ -28,11 +26,9 @@ private:
     Pixel origin;
     Canvas canvas;
 
-
     Pixel map_to_pixel(double math_x, double math_y);
 
     void draw_axes();
-
 
 public:
     Plotter(int rows, int cols, double range_x = 20.0);

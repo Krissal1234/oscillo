@@ -15,9 +15,6 @@ std::string split(const std::string& str);
 std::string extract_from_args(int argc, char **argv);
 
 int main(int argc, char **argv) {
-    std::locale::global(std::locale(""));
-
-    initscr();
 
     if (argc >= 5) {
         std::cout << "Too many arguments, Tip: dont use whitespaces" << std::endl;
@@ -36,6 +33,10 @@ int main(int argc, char **argv) {
         function = extract_from_args(argc, argv);
     }
 
+    std::locale::global(std::locale(""));
+
+    initscr();
+
     noecho();    
     curs_set(0);
 
@@ -47,9 +48,8 @@ int main(int argc, char **argv) {
 
     Evaluator e(function, plotter);
 
-    e.plot_axes();
     e.plot_function();
-
+    e.plot_axes();
 
     getch();
 
@@ -58,25 +58,6 @@ int main(int argc, char **argv) {
 
 
 }
-
-    
-    //ncursers stuff
-
-  //   struct winsize w;
-  //   ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-  //
-  //   int rows = w.ws_row;
-  //   int cols = w.ws_col;
-  //   std::cout << "grid: " << rows << " X " << cols << '\n';
-  //
-  // while (1){
-  //
-  //   // std::cout << "Rows: " << rows << ", Columns: " << cols << std::endl;
-  //
-  // }
-
-
-
 
 std::string split(const std::string& str) {
   std::string result;

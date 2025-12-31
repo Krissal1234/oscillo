@@ -58,7 +58,19 @@ std::vector<Test> tests = {
         {"x*x*x*x", 2.0, 16.0},
         {"(x+1)/(x+1)", 5.0, 1.0},
         {"1+(2+(3+(4+5)))", 0, 15.0},
-        {"x*2+x*3+x*4", 1.0, 9.0}
+        {"x*2+x*3+x*4", 1.0, 9.0},
+            //multiplication
+        // --- IMPLICIT MULTIPLICATION (e.g., 2x) ---
+        {"2x", 5.0, 10.0},              // Simple coefficient
+        {"10x", 2.5, 25.0},             // Multi-digit coefficient
+        {"0.5x", 10.0, 5.0},            // Floating point coefficient
+        {"x(x+1)", 3.0, 12.0},          // Variable before parenthesis: x*(x+1)
+        {"2(x+5)", 2.0, 14.0},          // Constant before parenthesis: 2*(x+5)
+        {"(x+1)(x-1)", 4.0, 15.0},      // Parenthesis-parenthesis: (x+1)*(x-1)
+        {"2x + 3x", 2.0, 10.0},         // Multiple implicit terms
+        {"10 - 2x", 3.0, 4.0},          // Order of operations: 10 - (2*3)
+        {"2(3)(4)", 0, 24.0},           // Multiple constants in parentheses
+        {"x(2x+1)", 2.0, 10.0},         // Nested implicit: x*(2*x + 1)
 };
 
 for (const Test& t : tests) {

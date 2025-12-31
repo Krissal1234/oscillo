@@ -7,8 +7,6 @@
 Evaluator::Evaluator(std::string_view input, Plotter& plotter) : input_str(input), plotter(plotter){
     Lexer l(input_str);
     l.tokenise();
-
-    l.print_tokens_vector();
     Parser p(l.get_tokens());
 
     this->root = p.parse_expression();
