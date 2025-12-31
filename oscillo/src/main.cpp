@@ -1,19 +1,24 @@
-#include <iostream>
+#define _XOPEN_SOURCE_EXTENDED 1 
+#include <clocale>              
+#include <ncurses.h>            
+#include <iostream>              
 #include <string>
 #include <sstream>
 #include <cstdlib>
 #include <sys/ioctl.h>
-#include "evaluator.h"
-#include "canvas.h"
 #include <unistd.h>
-#include <ncurses.h>
+#include "evaluator.h"
+#include "plotter.h"
 
 void run_evaluator_tests();
-
 std::string split(const std::string& str);
 std::string extract_from_args(int argc, char **argv);
 
 int main(int argc, char **argv) {
+    std::locale::global(std::locale(""));
+
+    initscr();
+
     if (argc >= 5) {
         std::cout << "Too many arguments, Tip: dont use whitespaces" << std::endl;
     }
@@ -24,30 +29,36 @@ int main(int argc, char **argv) {
     }
 
     std::string function {};
-    //extract function std::string, either through splitting a single string or through multiple function arguments
+
     if (argc == 2) { //one argument so possibly contains double brackets to contain function""
         function = split(argv[1]);
     } else {
         function = extract_from_args(argc, argv);
     }
 
-    std::cout << "Function: " << function << '\n';
+    // std::cout << "Function: " << function << '\n';
 
     Evaluator e(function);
 
     double ans = e.evaluate(4);
+    // std::cout << "ANS: " <<  ans << '\n';
 
-    std::cout << "ANS: " <<  ans << '\n';
+    //UI
 
+    
+    noecho();    
+    curs_set(0);
 
-    // initscr();
-    // int y, x;
-    // getmaxyx(stdscr, y, x);
-    //
-    // // Call the constructor with the actual screen size
-    // Canvas c(y, x);
-    //
-    // std::cout << x << ' ' << y << '\n';
+    int h, w;
+    getmaxyx(stdscr, h, w);
+ 
+    Plotter plotter(h, w);
+    plotter.draw_function();
+
+    getch();
+
+    endwin();
+    return 0;
 
 
 }

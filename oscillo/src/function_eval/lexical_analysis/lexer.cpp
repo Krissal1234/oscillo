@@ -51,15 +51,9 @@ void Lexer::print_tokens_vector() {
     }
 }
 
-// void Lexer::preprocess_input() {
-//
-// }
-
-
 void Lexer::handle_digit(char c) {
 
     std::string digit_string {c};
-
 
     while (true) {
         char curr = peek_current();

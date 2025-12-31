@@ -1,13 +1,16 @@
 #pragma once
-
+#include <vector>
 
 class Canvas {
-    int row;
-    int col;
+    std::vector<std::vector<wchar_t>> canvas;
 
 public:
-    Canvas(int row, int col);
+    Canvas(int width, int height);
+    void set(int x, int y);
+    void unset(int x, int y);
 
+    void draw_ncurses();
 
 
 };
+
