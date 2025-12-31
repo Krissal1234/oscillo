@@ -20,6 +20,9 @@ Plotter::Plotter(int rows, int cols, double range_x)
 
 Pixel Plotter::map_to_pixel(double math_x, double math_y) {
     
+    if (std::isnan(math_y) || std::isinf(math_y) || std::isnan(math_x) || std::isinf(math_x)) {
+        return {0, 0, false}; // Mark as not on screen
+    }
     double px_pct = (math_x - x_min) / (x_max - x_min);
     double py_pct = (y_max - math_y) / (y_max - y_min);
 
@@ -46,12 +49,53 @@ void Plotter::plot_and_render_axes() {
     render();
 }
 
-void Plotter::plot(double x, double y) {
+//implementation of Bresenham's Line Algorithm
+void Plotter::draw_line(int x0, int y0, int x1, int y1) {
+    int dx = std::abs(x1 - x0);
+    int dy = -std::abs(y1 - y0); 
+    int sx = x0 < x1 ? 1 : -1;  
+    int sy = y0 < y1 ? 1 : -1; 
+    int err = dx + dy;
 
-    Pixel p = map_to_pixel(x,y);
-    if (p.on_screen) {
-        canvas.set(p.x, p.y);
+    while (true) {
+        canvas.set(x0, y0); 
+
+        if (x0 == x1 && y0 == y1) break;
+
+        int e2 = 2 * err;
+        if (e2 >= dy) { 
+            err += dy;
+            x0 += sx;
+        }
+        if (e2 <= dx) { 
+            err += dx;
+            y0 += sy;
+        }
     }
+}
+
+void Plotter::plot(double x, double y) {
+    Pixel current_p = map_to_pixel(x, y);
+
+    if (!current_p.on_screen) {
+        has_prev = false; 
+        return;
+    }
+
+    if (has_prev) {
+        if (std::abs(current_p.y - prev_p.y) < (p_rows * 0.8)) { //checkkng if big jump
+             draw_line(prev_p.x, prev_p.y, current_p.x, current_p.y);
+        }
+    } else {
+        canvas.set(current_p.x, current_p.y);
+    }
+
+    prev_p = current_p;
+    has_prev = true;
+}
+
+void Plotter::reset_plot_state() {
+    has_prev = false;
 }
 
 void Plotter::render() {

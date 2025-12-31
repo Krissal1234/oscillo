@@ -1,5 +1,6 @@
 #include "syntax_tree.h"
 #include "token.h"
+#include <limits>
 Node::~Node() {};
 
 //constructors
@@ -14,7 +15,9 @@ double BinOpNode::evaluate(double x) {
             case OperatorType::SUBTRACTION:    return left_val - right_val;
             case OperatorType::MULTIPLICATION: return left_val * right_val;
             case OperatorType::DIVISION:       
-                if (right_val == 0) throw std::runtime_error("Division by zero");
+                if (right_val == 0) {
+                return std::numeric_limits<double>::infinity();
+                }
                 return left_val / right_val;
             default: return 0;
         }

@@ -28,7 +28,7 @@ void Evaluator::plot_function() {
     double math_width = x_max - x_min;
     double step = math_width / p_cols; 
 
-    for (int i = 0; i < p_cols; ++i) {
+    for (int i = 1; i < p_cols; ++i) {
         double math_x = x_min + (i * step);
         double math_y = evaluate(math_x); 
         plotter.plot(math_x, math_y);

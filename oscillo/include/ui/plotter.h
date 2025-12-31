@@ -25,6 +25,9 @@ private:
     
     Pixel origin;
     Canvas canvas;
+    bool has_prev;
+    Pixel prev_p;
+    
 
     Pixel map_to_pixel(double math_x, double math_y);
 
@@ -34,9 +37,10 @@ public:
     Plotter(int rows, int cols, double range_x = 20.0);
     void plot(double x, double y);
     void plot_and_render_axes();
+    void draw_line(int x0, int y0, int x1, int y1);
     void render();
+    void reset_plot_state();
 
-    //getters
     double get_xmax();
     double get_xmin();
     double get_pcols();
