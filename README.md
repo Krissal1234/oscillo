@@ -37,6 +37,7 @@ fic Unicode Braille character, effectively quadrupling the vertical resolution a
     </tr>
   </table>
 </div>
+
 ### Built With
 
 * [C++20](https://en.cppreference.com/w/cpp/20)
