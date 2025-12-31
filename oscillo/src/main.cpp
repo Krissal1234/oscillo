@@ -48,7 +48,7 @@ int main(int argc, char **argv) {
     Evaluator e(function, plotter);
 
     e.plot_axes();
-    // e.plot_function();
+    e.plot_function();
 
 
     getch();

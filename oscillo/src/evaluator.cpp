@@ -23,9 +23,9 @@ double Evaluator::evaluate(double x) {
 
 void Evaluator::plot_function() {
 
-    int x_max = plotter.get_xmax();
-    int x_min = plotter.get_xmin();
-    int p_cols = plotter.get_pcols();
+    double x_max = plotter.get_xmax();
+    double x_min = plotter.get_xmin();
+    double p_cols = plotter.get_pcols();
 
     double math_width = x_max - x_min;
     double step = math_width / p_cols; 

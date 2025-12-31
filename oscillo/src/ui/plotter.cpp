@@ -4,8 +4,8 @@
 #include <cmath>
 
 
-Plotter::Plotter(int rows, int cols, int range_x) 
-    : rows(rows), cols(cols), p_rows(rows * 4), p_cols(cols * 2), range_x(range_x), canvas(rows,cols)
+Plotter::Plotter(int rows, int cols, double range_x) 
+    : rows(rows), cols(cols), p_rows(rows * 4), p_cols(cols * 2), range_x(range_x), canvas(cols,rows)
 {
     double range_y = this->range_x * ((double)p_rows / (double)p_cols) * 0.5; //range_y determined dynamically
 
@@ -59,15 +59,15 @@ void Plotter::render() {
     refresh(); 
 }
 
-int Plotter::get_xmax() {
+double Plotter::get_xmax() {
     return x_max;
 }
 
-int Plotter::get_xmin() {
+double Plotter::get_xmin() {
     return x_min;
 }
 
-int Plotter::get_pcols() {
+double Plotter::get_pcols() {
     return p_cols;
 }
 

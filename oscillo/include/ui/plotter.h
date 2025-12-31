@@ -18,12 +18,12 @@ private:
     int p_cols;
 
     //terminal bounds
-    int y_min;
-    int y_max;
-    int x_min;
-    int x_max;
+    double y_min;
+    double y_max;
+    double x_min;
+    double x_max;
 
-    int range_x;
+    double range_x;
     
     Pixel origin;
     Canvas canvas;
@@ -35,14 +35,14 @@ private:
 
 
 public:
-    Plotter(int rows, int cols, int range_x = 20);
+    Plotter(int rows, int cols, double range_x = 20.0);
     void plot(double x, double y);
     void plot_and_render_axes();
     void render();
 
     //getters
-    int get_xmax();
-    int get_xmin();
-    int get_pcols();
+    double get_xmax();
+    double get_xmin();
+    double get_pcols();
     
 };
