@@ -36,24 +36,20 @@ int main(int argc, char **argv) {
         function = extract_from_args(argc, argv);
     }
 
-    // std::cout << "Function: " << function << '\n';
-
-    Evaluator e(function);
-
-    double ans = e.evaluate(4);
-    // std::cout << "ANS: " <<  ans << '\n';
-
-    //UI
-
-    
     noecho();    
     curs_set(0);
 
     int h, w;
+
     getmaxyx(stdscr, h, w);
  
     Plotter plotter(h, w);
-    plotter.draw_function();
+
+    Evaluator e(function, plotter);
+
+    e.plot_axes();
+    // e.plot_function();
+
 
     getch();
 

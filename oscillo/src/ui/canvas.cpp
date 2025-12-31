@@ -35,7 +35,6 @@ void Canvas::unset(int x, int y) {
 void Canvas::draw_ncurses() {
     //ncurses requires its own complex char
     cchar_t complex_char {};
-    erase(); 
 
     for (int row = 0; row < canvas.size(); ++row) {
         for (int col = 0; col < canvas[row].size(); ++col) {

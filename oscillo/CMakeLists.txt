@@ -10,7 +10,7 @@ find_package(Curses REQUIRED)
 
 add_executable(oscillo
     src/main.cpp
-    src/function_eval/evaluator.cpp
+    src/evaluator.cpp
     src/function_eval/lexical_analysis/lexer.cpp
     src/function_eval/lexical_analysis/token.cpp
     src/function_eval/syntax_analysis/syntax_tree.cpp

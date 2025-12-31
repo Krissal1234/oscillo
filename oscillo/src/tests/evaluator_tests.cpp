@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include "evaluator.h"
+#include "plotter.h"
 
 struct Test {
 std::string expr;
@@ -62,7 +63,9 @@ std::vector<Test> tests = {
 
 for (const Test& t : tests) {
     try {
-        Evaluator eval(t.expr);
+        
+        Plotter dummyplotter(10,10);
+        Evaluator eval(t.expr, dummyplotter);
         double res = eval.evaluate(t.x);
         if (std::abs(res - t.expected) < 1e-6) {
             std::cout << "PASS: " << t.expr << " (x=" << t.x << ") = " << res << "\n";

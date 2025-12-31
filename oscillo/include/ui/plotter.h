@@ -24,13 +24,25 @@ private:
     int x_max;
 
     int range_x;
+    
+    Pixel origin;
+    Canvas canvas;
 
 
     Pixel map_to_pixel(double math_x, double math_y);
-    void draw_axes(Canvas& canvas);
+
+    void draw_axes();
 
 
 public:
     Plotter(int rows, int cols, int range_x = 20);
-    void draw_function();
+    void plot(double x, double y);
+    void plot_and_render_axes();
+    void render();
+
+    //getters
+    int get_xmax();
+    int get_xmin();
+    int get_pcols();
+    
 };
