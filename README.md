@@ -40,7 +40,7 @@ Oscillo is a C++ terminal application designed to render mathematical functions 
 ### Built With
 
 * [C++20](https://en.cppreference.com/w/cpp/20)
-* [ncurses](https://invisible-island.net/ncurses/) (for terminal window management and color support)
+* [ncurses](https://invisible-island.net/ncurses/) (for terminal window management)
 
 
 ### Prerequisites
