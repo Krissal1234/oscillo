@@ -121,7 +121,7 @@ void Lexer::tokenise() {
         else if (c == '(' || c == ')') {
             tokens.push_back(TokenFactory::create_seperator(c));
         }
-        else if (std::isdigit(c) || c == '.') {
+        else if (std::isdigit(c) || c == '.') {//dot to allow doubles
             handle_digit(c); //this moves the pointer to eat the number
         }
         else if (c != '\0') {
