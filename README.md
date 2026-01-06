@@ -21,9 +21,8 @@ Oscillo is a C++ terminal application designed to render mathematical functions 
 
 ### Key Technical Features
 
-* **Custom Math Engine**: Features a robust **Lexer** and **Recursive Descent Parser** that tokenises mathematical strings and transforms them into an **Abstract Syntax Tree (AST)**. This allows for efficient recursive evaluation of complex expressions.
-* **High-Resolution Braille Rendering**: Instead of plotting one point per character, this project maps mathematical coordinates to a virtual bit-grid. Every 8 bits are then encoded into a speci
-fic Unicode Braille character, effectively quadrupling the vertical resolution and doubling the horizontal resolution of the terminal.
+* **Custom Math Engine**: Features a custom **Lexer** and **Recursive Descent Parser** that tokenises mathematical strings and transforms them into an **Abstract Syntax Tree (AST)**. This allows for recursive evaluation of different values of x, used to plot each point of the function.
+* **High-Resolution Braille Rendering**: Instead of plotting one point per character, this project maps mathematical coordinates to a virtual bit-grid. Every 8 bits are then encoded into a specific Unicode Braille character where every character cell acts as a 2x4 pixel display. This effectively quadruples the vertical resolution and doubles the horizontal resolution of the terminal.
 * **Bresenham's Line Algorithm**: To ensure a continuous curve without gaps, the plotter implements a customised Bresenham algorithm.
 <div align="center">
   <table border="0">
@@ -41,7 +40,7 @@ fic Unicode Braille character, effectively quadrupling the vertical resolution a
 ### Built With
 
 * [C++20](https://en.cppreference.com/w/cpp/20)
-* [ncurses](https://invisible-island.net/ncurses/) (for terminal window management and color support)
+* [ncurses](https://invisible-island.net/ncurses/) (for terminal window management)
 
 
 ### Prerequisites
