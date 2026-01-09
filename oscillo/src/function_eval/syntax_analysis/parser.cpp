@@ -102,30 +102,14 @@ std::unique_ptr<Node> Parser::parse_factor() {
 
     TokenType tk_type = tk->get_tok_type();
 
-    if (tk_type == TokenType::FUNCTION) {
-        FunctionToken* func_tok = static_cast<FunctionToken*>(tk);
-        FunctionType func_type = tk->get_func_type();
-        advance(); //to eat up the function e.g. sin
-
-        Token* next = peek(); //we expect a open bracket here
-        if (!next || next->get_seperator_type() != SeperatorType::OPEN_BRACKET) {
-            throw std::runtime_error("Expected ( ");
-        }
-        advance(); // eat (
-
-        auto arg = parse_expression();
-
-        Token* closing = peek();
-
-        if (!closing || closing->get_seperator_type() != SeperatorType::CLOSE_BRACKET) {
-            throw std::runtime_error("Expected )");
-        }
-
-        advance(); //eat )
-
-        return std::make_unique<FunctionNode>(func_type, std::move(arg));
+    if (is_unary_op(tk)) {
+        return parse_unary(); //handles negative numbers
     }
 
+
+    if (tk->get_tok_type() == TokenType::FUNCTION) {
+        return parse_factor_function_call();
+    }
 
     //we return a num node if it is a literal
     if (tk_type == TokenType::LITERAL || tk_type == TokenType::VARIABLE) {
@@ -137,19 +121,67 @@ std::unique_ptr<Node> Parser::parse_factor() {
         return std::make_unique<NumNode>(tk_type, val);
     }
 
-
-
     //if its a open bracket we have to return the expression
     if (tk->get_seperator_type() == SeperatorType::OPEN_BRACKET) {
-        advance(); //this eats (
-
-        auto node = parse_expression();
-
-        advance(); //eats )
-
-        return node;
+        return parse_parentheses();
     }
 
     throw std::runtime_error("Expected a number or parenthesis, but found something else");
 }
 
+//helper functions
+
+bool Parser::is_unary_op(Token* tk) {
+    return tk->get_tok_type() == TokenType::OPERATOR && 
+          (tk->get_operator_type() == OperatorType::SUBTRACTION || 
+           tk->get_operator_type() == OperatorType::ADDITION);
+}
+
+std::unique_ptr<Node> Parser::parse_unary() {
+    Token* op_tk = advance(); // eat -
+    auto operand = parse_factor(); 
+
+    // We make a new binary op node that subtracts 0 from operand, making it a negative numeber
+    if (op_tk->get_operator_type() == OperatorType::SUBTRACTION) {
+        auto zero = std::make_unique<NumNode>(TokenType::LITERAL, 0.0);
+
+        return std::make_unique<BinOpNode>(
+            std::move(zero), 
+            std::move(operand), 
+            OperatorType::SUBTRACTION
+        );
+    }
+    return operand;
+}
+
+std::unique_ptr<Node> Parser::parse_parentheses() {
+    advance(); // eat (
+    auto node = parse_expression();
+    
+    expect_seperator(SeperatorType::CLOSE_BRACKET);
+    advance(); // eat )
+    
+    
+    return node;
+}
+
+std::unique_ptr<Node> Parser::parse_factor_function_call() {
+
+    FunctionType func_type = advance()->get_func_type();
+
+    expect_seperator(SeperatorType::OPEN_BRACKET);
+    advance(); // eat (
+
+    auto arg = parse_expression();
+
+    expect_seperator(SeperatorType::CLOSE_BRACKET);
+    advance(); //eat )
+
+    return std::make_unique<FunctionNode>(func_type, std::move(arg));
+}
+
+void Parser::expect_seperator(SeperatorType type) {
+    if (!peek()|| peek()->get_seperator_type() != type) {
+        throw std::runtime_error("Syntax error");
+    }
+}

@@ -16,6 +16,13 @@ class Parser {
     std::unique_ptr<Node> parse_factor(); //multiplication or division 
     std::unique_ptr<Node> parse_term(); //brackets, functions 
     std::unique_ptr<Node> parse_power(); //indeces``
+
+    std::unique_ptr<Node> parse_factor_function_call();
+    void expect_seperator(SeperatorType type);
+    std::unique_ptr<Node> parse_parentheses();
+    std::unique_ptr<Node> parse_unary();
+    bool is_unary_op(Token* tk);
+
 public:
     std::unique_ptr<Node> parse_expression(); //returns root 
     
