@@ -43,3 +43,21 @@ void SeperatorToken::print() const {
 }
 }
 
+FunctionToken::FunctionToken(FunctionType func_type) : Token(TokenType::FUNCTION), func_type(func_type) {};
+
+FunctionType FunctionToken::get_func_type() const {
+    return func_type;
+}
+void FunctionToken::print() const {
+    std::cout << "[FUNCTION] - ";
+    switch(func_type) {
+        case FunctionType::SIN:   std::cout << "[sin]"; break;
+        case FunctionType::COS:   std::cout << "[cos]"; break;
+        case FunctionType::TAN:   std::cout << "[tan]"; break;
+        case FunctionType::LOG:   std::cout << "[log]"; break;
+        case FunctionType::SQRT:  std::cout << "[sqrt]"; break;
+        case FunctionType::COSEC:  std::cout << "[cosec]"; break;
+        default:                  std::cout << "[unknown]"; break;
+    }
+    std::cout << '\n';
+}

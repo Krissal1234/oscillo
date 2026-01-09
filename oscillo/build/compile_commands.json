@@ -1,0 +1,47 @@
+[
+{
+  "directory": "/home/krissal1234/Documents/projects/oscillo/oscillo/build",
+  "command": "/usr/bin/c++ -DNCURSES_WIDECHAR=1 -I/home/krissal1234/Documents/projects/oscillo/oscillo/include -I/home/krissal1234/Documents/projects/oscillo/oscillo/include/lexical_analysis -I/home/krissal1234/Documents/projects/oscillo/oscillo/include/syntax_analysis -I/home/krissal1234/Documents/projects/oscillo/oscillo/include/ui -std=gnu++20 -o CMakeFiles/oscillo.dir/src/main.cpp.o -c /home/krissal1234/Documents/projects/oscillo/oscillo/src/main.cpp",
+  "file": "/home/krissal1234/Documents/projects/oscillo/oscillo/src/main.cpp"
+},
+{
+  "directory": "/home/krissal1234/Documents/projects/oscillo/oscillo/build",
+  "command": "/usr/bin/c++ -DNCURSES_WIDECHAR=1 -I/home/krissal1234/Documents/projects/oscillo/oscillo/include -I/home/krissal1234/Documents/projects/oscillo/oscillo/include/lexical_analysis -I/home/krissal1234/Documents/projects/oscillo/oscillo/include/syntax_analysis -I/home/krissal1234/Documents/projects/oscillo/oscillo/include/ui -std=gnu++20 -o CMakeFiles/oscillo.dir/src/evaluator.cpp.o -c /home/krissal1234/Documents/projects/oscillo/oscillo/src/evaluator.cpp",
+  "file": "/home/krissal1234/Documents/projects/oscillo/oscillo/src/evaluator.cpp"
+},
+{
+  "directory": "/home/krissal1234/Documents/projects/oscillo/oscillo/build",
+  "command": "/usr/bin/c++ -DNCURSES_WIDECHAR=1 -I/home/krissal1234/Documents/projects/oscillo/oscillo/include -I/home/krissal1234/Documents/projects/oscillo/oscillo/include/lexical_analysis -I/home/krissal1234/Documents/projects/oscillo/oscillo/include/syntax_analysis -I/home/krissal1234/Documents/projects/oscillo/oscillo/include/ui -std=gnu++20 -o CMakeFiles/oscillo.dir/src/function_eval/lexical_analysis/lexer.cpp.o -c /home/krissal1234/Documents/projects/oscillo/oscillo/src/function_eval/lexical_analysis/lexer.cpp",
+  "file": "/home/krissal1234/Documents/projects/oscillo/oscillo/src/function_eval/lexical_analysis/lexer.cpp"
+},
+{
+  "directory": "/home/krissal1234/Documents/projects/oscillo/oscillo/build",
+  "command": "/usr/bin/c++ -DNCURSES_WIDECHAR=1 -I/home/krissal1234/Documents/projects/oscillo/oscillo/include -I/home/krissal1234/Documents/projects/oscillo/oscillo/include/lexical_analysis -I/home/krissal1234/Documents/projects/oscillo/oscillo/include/syntax_analysis -I/home/krissal1234/Documents/projects/oscillo/oscillo/include/ui -std=gnu++20 -o CMakeFiles/oscillo.dir/src/function_eval/lexical_analysis/token.cpp.o -c /home/krissal1234/Documents/projects/oscillo/oscillo/src/function_eval/lexical_analysis/token.cpp",
+  "file": "/home/krissal1234/Documents/projects/oscillo/oscillo/src/function_eval/lexical_analysis/token.cpp"
+},
+{
+  "directory": "/home/krissal1234/Documents/projects/oscillo/oscillo/build",
+  "command": "/usr/bin/c++ -DNCURSES_WIDECHAR=1 -I/home/krissal1234/Documents/projects/oscillo/oscillo/include -I/home/krissal1234/Documents/projects/oscillo/oscillo/include/lexical_analysis -I/home/krissal1234/Documents/projects/oscillo/oscillo/include/syntax_analysis -I/home/krissal1234/Documents/projects/oscillo/oscillo/include/ui -std=gnu++20 -o CMakeFiles/oscillo.dir/src/function_eval/syntax_analysis/syntax_tree.cpp.o -c /home/krissal1234/Documents/projects/oscillo/oscillo/src/function_eval/syntax_analysis/syntax_tree.cpp",
+  "file": "/home/krissal1234/Documents/projects/oscillo/oscillo/src/function_eval/syntax_analysis/syntax_tree.cpp"
+},
+{
+  "directory": "/home/krissal1234/Documents/projects/oscillo/oscillo/build",
+  "command": "/usr/bin/c++ -DNCURSES_WIDECHAR=1 -I/home/krissal1234/Documents/projects/oscillo/oscillo/include -I/home/krissal1234/Documents/projects/oscillo/oscillo/include/lexical_analysis -I/home/krissal1234/Documents/projects/oscillo/oscillo/include/syntax_analysis -I/home/krissal1234/Documents/projects/oscillo/oscillo/include/ui -std=gnu++20 -o CMakeFiles/oscillo.dir/src/function_eval/syntax_analysis/parser.cpp.o -c /home/krissal1234/Documents/projects/oscillo/oscillo/src/function_eval/syntax_analysis/parser.cpp",
+  "file": "/home/krissal1234/Documents/projects/oscillo/oscillo/src/function_eval/syntax_analysis/parser.cpp"
+},
+{
+  "directory": "/home/krissal1234/Documents/projects/oscillo/oscillo/build",
+  "command": "/usr/bin/c++ -DNCURSES_WIDECHAR=1 -I/home/krissal1234/Documents/projects/oscillo/oscillo/include -I/home/krissal1234/Documents/projects/oscillo/oscillo/include/lexical_analysis -I/home/krissal1234/Documents/projects/oscillo/oscillo/include/syntax_analysis -I/home/krissal1234/Documents/projects/oscillo/oscillo/include/ui -std=gnu++20 -o CMakeFiles/oscillo.dir/src/ui/plotter.cpp.o -c /home/krissal1234/Documents/projects/oscillo/oscillo/src/ui/plotter.cpp",
+  "file": "/home/krissal1234/Documents/projects/oscillo/oscillo/src/ui/plotter.cpp"
+},
+{
+  "directory": "/home/krissal1234/Documents/projects/oscillo/oscillo/build",
+  "command": "/usr/bin/c++ -DNCURSES_WIDECHAR=1 -I/home/krissal1234/Documents/projects/oscillo/oscillo/include -I/home/krissal1234/Documents/projects/oscillo/oscillo/include/lexical_analysis -I/home/krissal1234/Documents/projects/oscillo/oscillo/include/syntax_analysis -I/home/krissal1234/Documents/projects/oscillo/oscillo/include/ui -std=gnu++20 -o CMakeFiles/oscillo.dir/src/ui/canvas.cpp.o -c /home/krissal1234/Documents/projects/oscillo/oscillo/src/ui/canvas.cpp",
+  "file": "/home/krissal1234/Documents/projects/oscillo/oscillo/src/ui/canvas.cpp"
+},
+{
+  "directory": "/home/krissal1234/Documents/projects/oscillo/oscillo/build",
+  "command": "/usr/bin/c++ -DNCURSES_WIDECHAR=1 -I/home/krissal1234/Documents/projects/oscillo/oscillo/include -I/home/krissal1234/Documents/projects/oscillo/oscillo/include/lexical_analysis -I/home/krissal1234/Documents/projects/oscillo/oscillo/include/syntax_analysis -I/home/krissal1234/Documents/projects/oscillo/oscillo/include/ui -std=gnu++20 -o CMakeFiles/oscillo.dir/src/tests/evaluator_tests.cpp.o -c /home/krissal1234/Documents/projects/oscillo/oscillo/src/tests/evaluator_tests.cpp",
+  "file": "/home/krissal1234/Documents/projects/oscillo/oscillo/src/tests/evaluator_tests.cpp"
+}
+]

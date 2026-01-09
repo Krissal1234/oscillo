@@ -3,12 +3,13 @@
 #include <ncurses.h>
 #include <cmath>
 
+static constexpr double buffer_pct = 0.05;
+constexpr double aspect_ratio {0.5}; // each character is twice as wide as it is tall, so y axis needs to account 
 
 Plotter::Plotter(int rows, int cols, double range_x) 
     : rows(rows), cols(cols), p_rows(rows * 4), p_cols(cols * 2), range_x(range_x), canvas(cols,rows)
 {
-    double range_y = this->range_x * ((double)p_rows / (double)p_cols) * 0.5; //range_y determined dynamically
-
+    double range_y = this->range_x * static_cast<double>(p_rows) / static_cast<double>(p_cols) * aspect_ratio; //range_y determined dynamically
     this->x_min = -this->range_x / 2.0;
     this->x_max =  this->range_x / 2.0;
     this->y_min = -range_y / 2.0;
@@ -26,6 +27,7 @@ Pixel Plotter::map_to_pixel(double math_x, double math_y) {
     double px_pct = (math_x - x_min) / (x_max - x_min);
     double py_pct = (y_max - math_y) / (y_max - y_min);
 
+
     int px = static_cast<int>(px_pct * (p_cols - 1));
     int py = static_cast<int>(py_pct * (p_rows - 1));
 
@@ -34,14 +36,15 @@ Pixel Plotter::map_to_pixel(double math_x, double math_y) {
     return {px, py, visible};
 }
 
+
 void Plotter::plot_and_render_axes() {
     if (origin.y >= 0 && origin.y < p_rows) {
-        for (int x = 0; x < p_cols; ++x) {
+        for (int x = 0; x <= p_cols; ++x) {
             canvas.set(x, origin.y);
         }
     }
     if (origin.x >= 0 && origin.x < p_cols) {
-        for (int y = 0; y < p_rows; ++y) {
+        for (int y = 0; y <= p_rows; ++y) {
             canvas.set(origin.x, y);
         }
     }
@@ -53,11 +56,16 @@ void Plotter::plot_and_render_axes() {
 void Plotter::draw_line(int x0, int y0, int x1, int y1) {
     int dx = std::abs(x1 - x0);
     int dy = -std::abs(y1 - y0); 
+
+    //steps, if the endpoint is to the right, it is 1, and -1 to the left
+    //tells it to increment or decrement during steps
     int sx = x0 < x1 ? 1 : -1;  
     int sy = y0 < y1 ? 1 : -1; 
+
+    //balance, tracks how far the current point is from a smooth line
     int err = dx + dy;
 
-    while (true) {
+    while (true) { //loop until we reach endpoint
         canvas.set(x0, y0); 
 
         if (x0 == x1 && y0 == y1) break;
@@ -77,13 +85,15 @@ void Plotter::draw_line(int x0, int y0, int x1, int y1) {
 void Plotter::plot(double x, double y) {
     Pixel current_p = map_to_pixel(x, y);
 
+
     if (!current_p.on_screen) {
         has_prev = false; 
         return;
     }
 
     if (has_prev) {
-        if (std::abs(current_p.y - prev_p.y) < (p_rows * 0.8)) { //checkkng if big jump
+        if (std::abs(current_p.y - prev_p.y) < (p_rows * 0.8) 
+            && std::abs(current_p.x - prev_p.x) < (p_cols * 0.8)) { //checkkng if big jump
              draw_line(prev_p.x, prev_p.y, current_p.x, current_p.y);
         }
     } else {

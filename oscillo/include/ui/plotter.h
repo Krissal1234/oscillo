@@ -34,7 +34,7 @@ private:
     void draw_axes();
 
 public:
-    Plotter(int rows, int cols, double range_x = 20.0);
+    Plotter(int rows, int cols, double range_x = 15.0);
     void plot(double x, double y);
     void plot_and_render_axes();
     void draw_line(int x0, int y0, int x1, int y1);

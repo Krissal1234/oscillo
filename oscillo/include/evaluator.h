@@ -13,11 +13,11 @@ class Evaluator {
     public:
     Evaluator(std::string_view input, Plotter& plotter);
 
+
     void plot_function(); 
     void plot_axes();
     double evaluate(double x);
 };
     
-
 
 

@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # 1. Ask for the Wide version specifically
 set(CURSES_NEED_WIDE TRUE) 
 find_package(Curses REQUIRED)
-
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 add_executable(oscillo
     src/main.cpp
     src/evaluator.cpp

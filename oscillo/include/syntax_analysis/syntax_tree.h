@@ -1,6 +1,5 @@
 #pragma once
 #include <memory>
-#include <vector>
 #include "token.h"
 
 class Node {
@@ -27,5 +26,12 @@ public:
     BinOpNode( std::unique_ptr<Node> left, std::unique_ptr<Node> right, OperatorType op_type);
 };
 
+class FunctionNode : public Node {
+    FunctionType func_type;
+    std::unique_ptr<Node> arg;
+public:
+    double evaluate(double x) override;
+    FunctionNode(FunctionType func_type, std::unique_ptr<Node> arg);
+};
 
 

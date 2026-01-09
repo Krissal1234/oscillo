@@ -1,6 +1,7 @@
 #include "syntax_tree.h"
 #include "token.h"
 #include <limits>
+#include <cmath>
 Node::~Node() {};
 
 //constructors
@@ -30,4 +31,20 @@ double NumNode::evaluate(double x) {
     return (tok_type == TokenType::VARIABLE) ? x : value;
 }
 
+FunctionNode::FunctionNode(FunctionType func_type, std::unique_ptr<Node> arg) : func_type(func_type), arg(std::move(arg)) {};
+
+double FunctionNode::evaluate(double x) {
+    double inner_value = arg->evaluate(x);
+
+    switch (func_type) {
+        case FunctionType::SIN:   return std::sin(inner_value);
+        case FunctionType::COS:   return std::cos(inner_value);
+        case FunctionType::TAN:   return std::tan(inner_value);
+        case FunctionType::SQRT:  return std::sqrt(inner_value);
+        case FunctionType::LOG:   return std::log(inner_value);
+        case FunctionType::COSEC: return 1 / std::sin(inner_value); //csc = 1/sinx
+        default:
+            return 0.0; 
+    }
+}
 

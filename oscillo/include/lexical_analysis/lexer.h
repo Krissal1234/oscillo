@@ -18,7 +18,8 @@ private:
     char peek_next();
     char advance();
     bool is_operator(char c);
-    void handle_digit(char c);
+    double handle_digit(char c);
+    void handle_alpha(char c);
     bool needs_implicit_multiplication(char current_c);
 
 public:

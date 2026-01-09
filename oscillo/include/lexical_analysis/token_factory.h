@@ -15,5 +15,9 @@ public:
         SeperatorType type = (c == '(') ? SeperatorType::OPEN_BRACKET : SeperatorType::CLOSE_BRACKET; 
         return std::make_unique<SeperatorToken>(type);
     }
+    static std::unique_ptr<Token> create_function(FunctionType func_type) {
+        return std::make_unique<FunctionToken>(func_type);
+    }
+
 };
 

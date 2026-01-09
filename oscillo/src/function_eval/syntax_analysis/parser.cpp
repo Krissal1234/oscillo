@@ -70,6 +70,34 @@ std::unique_ptr<Node> Parser::parse_factor() {
     if (!tk) throw std::runtime_error("Unexpected end");
 
     TokenType tk_type = tk->get_tok_type();
+
+    if (tk_type == TokenType::FUNCTION) {
+
+        FunctionToken* func_tok = static_cast<FunctionToken*>(tk);
+        FunctionType func_type = tk->get_func_type();
+        advance(); //to eat up the function e.g. sin
+
+        Token* next = peek(); //we expect a open bracket here
+        if (!next || next->get_seperator_type() != SeperatorType::OPEN_BRACKET) {
+            throw std::runtime_error("Expected ( ");
+        }
+        advance(); // eat (
+
+        auto arg = parse_expression();
+
+        Token* closing = peek();
+
+        if (!closing || closing->get_seperator_type() != SeperatorType::CLOSE_BRACKET) {
+            throw std::runtime_error("Expected )");
+        }
+
+        advance(); //eat )
+
+        return std::make_unique<FunctionNode>(func_type, std::move(arg));
+
+    }
+
+
     //we return a num node if it is a literal
     if (tk_type == TokenType::LITERAL || tk_type == TokenType::VARIABLE) {
         OperandToken* operand_tok = static_cast<OperandToken*>(tk);

@@ -5,8 +5,17 @@
 
 //constructor returns root, so that we dont need to build the tree every time we evaluate
 Evaluator::Evaluator(std::string_view input, Plotter& plotter) : input_str(input), plotter(plotter){
+
     Lexer l(input_str);
     l.tokenise();
+    // std::vector<std::unique_ptr<Token>> tokens = l.get_tokens();
+    //
+    // //for testing
+    // for (const auto& token : tokens) {
+    //     token->print();
+    // }
+    // Parser p(std::move(tokens));
+    
     Parser p(l.get_tokens());
 
     this->root = p.parse_expression();
@@ -33,9 +42,9 @@ void Evaluator::plot_function() {
         double math_y = evaluate(math_x); 
         plotter.plot(math_x, math_y);
     }
-
     plotter.render();
 }
+
 void Evaluator::plot_axes() {
     plotter.plot_and_render_axes();
 }

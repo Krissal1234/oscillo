@@ -1,7 +1,11 @@
+#include <iostream>
 #include "lexer.h"
 #include "token_factory.h"
 #include <memory>
 #include <unordered_map>
+#include <algorithm>
+#include <cctype>
+#include <string>
 
 // static constexpr std::string_view operator_list {"+/-*"};
 static const std::unordered_map<char, OperatorType> operator_list {
@@ -9,6 +13,15 @@ static const std::unordered_map<char, OperatorType> operator_list {
     {'/', OperatorType::DIVISION},
     {'-', OperatorType::SUBTRACTION},
     {'*', OperatorType::MULTIPLICATION}
+};
+
+static const std::unordered_map<std::string, FunctionType> function_list{
+    {"log", FunctionType::LOG}, 
+    {"sqrt", FunctionType::SQRT}, 
+    {"sin", FunctionType::SIN}, 
+    {"cos", FunctionType::COS}, 
+    {"tan", FunctionType::TAN}, 
+    {"cosec", FunctionType::COSEC} 
 };
 
 // Constructor
@@ -83,7 +96,7 @@ bool Lexer::needs_implicit_multiplication(char current_c) {
     return false;
 }
 
-void Lexer::handle_digit(char c) {
+double Lexer::handle_digit(char c) {
 
     std::string digit_string {c};
 
@@ -97,7 +110,26 @@ void Lexer::handle_digit(char c) {
         }
     }
 
-    tokens.push_back(TokenFactory::create_operand(TokenType::LITERAL, stod(digit_string)));
+    return stod(digit_string);
+}
+
+void Lexer::handle_alpha(char c) { //for now assuming no variable, so we can automatically push operand
+    std::string alpha_string {c};
+    
+    while(std::isalpha(peek_current())) {
+        alpha_string += advance();
+    }
+
+    //to lower case
+    std::transform(alpha_string.begin(), alpha_string.end(), alpha_string.begin(), [](unsigned char c){ return std::tolower(c); });
+
+    std::cout << alpha_string << '\n';
+
+    auto got = function_list.find(alpha_string);
+
+    if (got != function_list.end())  {
+        tokens.push_back(TokenFactory::create_function(got->second));
+    }
 }
 
 void Lexer::tokenise() {
@@ -112,17 +144,20 @@ void Lexer::tokenise() {
             tokens.push_back(TokenFactory::create_operator(OperatorType::MULTIPLICATION));
         }
 
+
         if (operator_list.count(c)) { //operator 
             tokens.push_back(TokenFactory::create_operator(operator_list.at(c)));
         }
         else if (c == 'x') { //variable to modify
             tokens.push_back(TokenFactory::create_operand(TokenType::VARIABLE, 0.0));
-        }
+        } else if (std::isalpha(c)) { // could be trigonmetric func or log
+            handle_alpha(c); //moves pointer
+        } 
         else if (c == '(' || c == ')') {
             tokens.push_back(TokenFactory::create_seperator(c));
         }
         else if (std::isdigit(c) || c == '.') {//dot to allow doubles
-            handle_digit(c); //this moves the pointer to eat the number
+            tokens.push_back(TokenFactory::create_operand(TokenType::LITERAL, handle_digit(c)));
         }
         else if (c != '\0') {
             throw std::runtime_error("Invalid Token");

@@ -12,7 +12,7 @@ double expected;
 
 void run_evaluator_tests() {
 std::vector<Test> tests = {
-        // --- ARITHMETIC & PRECEDENCE ---
+        //arithmetic and precidence
         {"1+2+3", 0, 6.0},
         {"10-5-2", 0, 3.0},
         {"24/4/2", 0, 3.0},
@@ -24,7 +24,7 @@ std::vector<Test> tests = {
         {"10+20/5-2", 0, 12.0},
         {"10-5+2", 0, 7},
 
-        // --- PARENTHESES & GROUPING ---
+        //brackets
         {"(2+3)*4", 0, 20.0},
         {"10/(2+3)", 0, 2.0},
         {"(10-5)-2", 0, 3.0},
@@ -34,7 +34,7 @@ std::vector<Test> tests = {
         {"2*(3+(4*5))", 0, 46.0},
         {"5+(10-(2+3))", 0, 10.0},
 
-        // --- VARIABLE SUBSTITUTION (x) ---
+        // variable x substitution
         {"x", 7.5, 7.5},
         {"x+x+x", 2.0, 6.0},
         {"2*x+5", 10.0, 25.0},
@@ -44,7 +44,7 @@ std::vector<Test> tests = {
         {"x/2", 1.0, 0.5},
         {"(x+5)/x", 2.5, 3.0},
 
-        // --- FLOATING POINT & DECIMALS ---
+        // Decimals
         {"0.5+0.5", 0, 1.0},
         {"2.5*4", 0, 10.0},
         {"1.25+3.75", 0, 5.0},
@@ -52,25 +52,24 @@ std::vector<Test> tests = {
         {"10/4", 0, 2.5},
         {"0.1+0.2", 0, 0.3},
 
-        // --- COMPLEX CHAINING ---
+        // chaining
         {"1+2*3+4*5", 0, 27.0},
         {"(1+2)*(3+4)", 0, 21.0},
         {"x*x*x*x", 2.0, 16.0},
         {"(x+1)/(x+1)", 5.0, 1.0},
         {"1+(2+(3+(4+5)))", 0, 15.0},
         {"x*2+x*3+x*4", 1.0, 9.0},
-            //multiplication
-        // --- IMPLICIT MULTIPLICATION (e.g., 2x) ---
-        {"2x", 5.0, 10.0},              // Simple coefficient
-        {"10x", 2.5, 25.0},             // Multi-digit coefficient
-        {"0.5x", 10.0, 5.0},            // Floating point coefficient
-        {"x(x+1)", 3.0, 12.0},          // Variable before parenthesis: x*(x+1)
-        {"2(x+5)", 2.0, 14.0},          // Constant before parenthesis: 2*(x+5)
-        {"(x+1)(x-1)", 4.0, 15.0},      // Parenthesis-parenthesis: (x+1)*(x-1)
-        {"2x + 3x", 2.0, 10.0},         // Multiple implicit terms
-        {"10 - 2x", 3.0, 4.0},          // Order of operations: 10 - (2*3)
-        {"2(3)(4)", 0, 24.0},           // Multiple constants in parentheses
-        {"x(2x+1)", 2.0, 10.0},         // Nested implicit: x*(2*x + 1)
+        //implicit multiplication
+        {"2x", 5.0, 10.0},              
+        {"10x", 2.5, 25.0},            
+        {"0.5x", 10.0, 5.0},          
+        {"x(x+1)", 3.0, 12.0},       
+        {"2(x+5)", 2.0, 14.0},      
+        {"(x+1)(x-1)", 4.0, 15.0}, 
+        {"2x + 3x", 2.0, 10.0},   
+        {"10 - 2x", 3.0, 4.0},   
+        {"2(3)(4)", 0, 24.0},   
+        {"x(2x+1)", 2.0, 10.0},
 };
 
 for (const Test& t : tests) {

@@ -1,4 +1,3 @@
-#define _XOPEN_SOURCE_EXTENDED 1 
 #include <clocale>              
 #include <ncurses.h>            
 #include <iostream>              
@@ -32,31 +31,32 @@ int main(int argc, char **argv) {
     } else {
         function = extract_from_args(argc, argv);
     }
+    
 
     std::locale::global(std::locale(""));
 
     initscr();
-
+    //
     noecho();    
     curs_set(0);
-
+    //
     int h, w;
 
     getmaxyx(stdscr, h, w);
+
+    // std::cout << h << ' ' << w << '\n';
  
     Plotter plotter(h, w);
 
     Evaluator e(function, plotter);
-
+    //
     e.plot_function();
     e.plot_axes();
 
     getch();
-
+    //
     endwin();
     return 0;
-
-
 }
 
 std::string split(const std::string& str) {
