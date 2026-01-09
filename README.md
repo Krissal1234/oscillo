@@ -37,11 +37,27 @@ Oscillo is a C++ terminal application designed to render mathematical functions 
   </table>
 </div>
 
+### Operations & Functions
+| Category | Syntax | Examples |
+| :--- | :--- | :--- |
+| **Arithmetic** | `+`, `-`, `*`, `/` | `x + 5`, `x / 2`, `(x + 1) * (x - 1)` |
+| **Trigonometry** | `sin()`, `cos()`, `tan()` | `sin(x)`, `cos(x / 2)`, `tan(x)` |
+| **Logarithms** | `log()`| `log(x)` |
+| **Power/Root** | `sqrt()`, `abs()` | `sqrt(x + 10)`, `abs(x)` |
+| **Implicit Mult.** | `n(x)` or `(a)(b)` | `2x`, `(x+1)(x-2)` |
+
+
 ### Built With
 
 * [C++20](https://en.cppreference.com/w/cpp/20)
 * [ncurses](https://invisible-island.net/ncurses/) (for terminal window management)
 
+### 2. Examples to Try
+Run these commands to see the Braille rendering in action:
+* **Wave Interference:** `./oscillo "sin(x) + cos(2x)"`
+* **Discontinuities:** `./oscillo "tan(x)"` 
+
+## Getting Started
 
 ### Prerequisites
 
@@ -50,3 +66,18 @@ You will need a C++ compiler supporting C++20 and the ncurses library installed 
   ```sh
   sudo apt-get install libncurses5-dev libncursesw5-dev
   ```
+### Installation & Build
+
+Oscillo uses a standard CMake build pipeline:
+
+```sh
+# 1. Clone the repository
+git clone [https://github.com/yourusername/oscillo.git](https://github.com/yourusername/oscillo.git)
+cd oscillo
+
+# 2. Create build directory
+mkdir build && cd build
+
+# 3. Compile
+cmake ..
+make

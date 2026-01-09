@@ -72,7 +72,6 @@ std::unique_ptr<Node> Parser::parse_factor() {
     TokenType tk_type = tk->get_tok_type();
 
     if (tk_type == TokenType::FUNCTION) {
-
         FunctionToken* func_tok = static_cast<FunctionToken*>(tk);
         FunctionType func_type = tk->get_func_type();
         advance(); //to eat up the function e.g. sin
@@ -94,7 +93,6 @@ std::unique_ptr<Node> Parser::parse_factor() {
         advance(); //eat )
 
         return std::make_unique<FunctionNode>(func_type, std::move(arg));
-
     }
 
 

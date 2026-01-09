@@ -49,7 +49,7 @@ int main(int argc, char **argv) {
     Plotter plotter(h, w);
 
     Evaluator e(function, plotter);
-    //
+
     e.plot_function();
     e.plot_axes();
 
