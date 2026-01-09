@@ -8,9 +8,10 @@ Evaluator::Evaluator(std::string_view input, Plotter& plotter) : input_str(input
 
     Lexer l(input_str);
     l.tokenise();
+
+    // //for testing
     // std::vector<std::unique_ptr<Token>> tokens = l.get_tokens();
     //
-    // //for testing
     // for (const auto& token : tokens) {
     //     token->print();
     // }

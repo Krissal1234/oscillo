@@ -10,7 +10,8 @@ static const std::unordered_map<char, OperatorType> operator_list {
     {'+', OperatorType::ADDITION}, 
     {'/', OperatorType::DIVISION},
     {'-', OperatorType::SUBTRACTION},
-    {'*', OperatorType::MULTIPLICATION}
+    {'*', OperatorType::MULTIPLICATION},
+    {'^', OperatorType::POWER}
 };
 
 static const std::unordered_map<std::string, FunctionType> function_list{

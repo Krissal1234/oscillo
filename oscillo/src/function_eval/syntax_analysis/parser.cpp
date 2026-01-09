@@ -44,7 +44,7 @@ std::unique_ptr<Node> Parser::parse_expression() {
 
 std::unique_ptr<Node> Parser::parse_term() {
 
-    auto left = parse_factor();
+    auto left = parse_power();
 
     while (peek() != nullptr && peek()->get_tok_type() == TokenType::OPERATOR) {
         
@@ -55,12 +55,43 @@ std::unique_ptr<Node> Parser::parse_term() {
         }
 
         advance(); 
-        auto right = parse_factor();
+        auto right = parse_power();
 
         left = std::make_unique<BinOpNode>(std::move(left), std::move(right), op);
     }
 
     return left;
+}
+
+//handles ^ operator
+std::unique_ptr<Node> Parser::parse_power() {
+    auto left = parse_factor();
+
+    while (peek() != nullptr && peek()->get_tok_type() == TokenType::OPERATOR) {
+
+        OperatorType op = peek()->get_operator_type();
+        if (op != OperatorType::POWER) break; 
+        
+        advance(); //eat ^
+        
+        if (!peek() || peek()->get_seperator_type() != SeperatorType::OPEN_BRACKET) {
+            throw std::runtime_error("Power operator '^' requires parentheses for the exponent: base^(exp)");
+        }
+        advance(); // eat (
+
+        auto right = parse_expression();
+
+        if (!peek() || peek()->get_seperator_type() != SeperatorType::CLOSE_BRACKET) {
+            throw std::runtime_error("Expected ')' after exponent");
+        }
+
+        advance(); // eat )
+
+        left = std::make_unique<BinOpNode>(std::move(left), std::move(right), OperatorType::POWER);
+    }
+
+    return left;
+
 }
 
 std::unique_ptr<Node> Parser::parse_factor() {
@@ -105,6 +136,7 @@ std::unique_ptr<Node> Parser::parse_factor() {
 
         return std::make_unique<NumNode>(tk_type, val);
     }
+
 
 
     //if its a open bracket we have to return the expression

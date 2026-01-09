@@ -15,6 +15,7 @@ void OperatorToken::print() const {
         case OperatorType::SUBTRACTION:    std::cout << "[-]" << '\n'; break;
         case OperatorType::MULTIPLICATION: std::cout << "[*]" << '\n'; break;
         case OperatorType::DIVISION:       std::cout << "[/]" << '\n'; break;
+        case OperatorType::POWER:          std::cout << "[^]" << '\n'; break;
         default:                           std::cout << "[?]" << '\n'; break;
     }
 }

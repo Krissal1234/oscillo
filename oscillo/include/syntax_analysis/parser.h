@@ -14,7 +14,8 @@ class Parser {
     Token* advance();
 
     std::unique_ptr<Node> parse_factor(); //multiplication or division 
-    std::unique_ptr<Node> parse_term(); // indices
+    std::unique_ptr<Node> parse_term(); //brackets, functions 
+    std::unique_ptr<Node> parse_power(); //indeces``
 public:
     std::unique_ptr<Node> parse_expression(); //returns root 
     

@@ -82,10 +82,29 @@ std::vector<Test> tests = {
         {"abs(x - 10) / 2", 4.0, 3.0}, 
         {"10 - log(exp(5))", 0, 5.0},
 
-        // Deeply nested complexity
+        // Deeply nested 
         {"sqrt(abs(sin(0) - 16))", 0, 4.0},
         {"2(3 + sin(x/2) * cos(x/2))", 0, 6.0}, 
         {"exp(log(sqrt(x*x)))", 10.0, 10.0},
+
+        // Basic Power Operations
+        {"x^(2)", 3.0, 9.0},
+        {"x^(3)", 2.0, 8.0},
+        {"2^(3)", 0, 8.0},
+        {"(-2)^(2)", 0, 4.0},
+        {"9^(0.5)", 0, 3.0}, 
+        //
+        //// Complex Base/Exponents
+        {"(x+1)^(2)", 2.0, 9.0},   
+        {"2^(x+1)", 2.0, 8.0},      
+        {"(x*2)^(x/2)", 4.0, 64.0},  
+        {"x^(x)", 3.0, 27.0},        
+        //
+        //// Power mixed with Functions
+        {"sin(x)^(2)", 0, 0.0},
+        {"abs(x-10)^(2)", 8.0, 4.0}, 
+        {"exp(x)^(2)", 0, 1.0},      
+        {"sqrt(x^(2))", -5.0, 5.0}, 
 };
 
 for (const Test& t : tests) {

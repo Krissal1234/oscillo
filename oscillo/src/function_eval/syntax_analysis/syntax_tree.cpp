@@ -19,6 +19,7 @@ double BinOpNode::evaluate(double x) {
                     return std::numeric_limits<double>::infinity();
                 }
                 return left_val / right_val;
+            case OperatorType::POWER:           return std::pow(left_val, right_val);
             default: return 0;
         }
 }
