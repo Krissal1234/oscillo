@@ -27,14 +27,18 @@ Oscillo is a C++ terminal application designed to render mathematical functions 
 <div align="center">
 
 ### Operations & Functions
+
 | Category | Syntax | Examples |
 | :--- | :--- | :--- |
 | **Arithmetic** | `+`, `-`, `*`, `/` | `x + 5`, `x / 2`, `(x + 1) * (x - 1)` |
 | **Trigonometry** | `sin()`, `cos()`, `tan()` | `sin(x)`, `cos(x / 2)`, `tan(x)` |
-| **Logarithms** | `log()`,`exp()` | `log(x)`, `exp(x)`|
-| **Power/Root** | `sqrt()`, `abs()` | `sqrt(x + 10)`, `abs(x)` |
-| **Implicit Mult.** | `n(x)` or `(a)(b)` | `2x`, `(x+1)(x-2)` |
-</div>
+| **Logarithms** | `log()`, `exp()` | `log(x)`, `exp(x)` |
+| **Power** | `base^(exp)` | `x^(2)`, `2^(x+1)`, `(x+1)^(0.5)` |
+| **Root/Misc** | `sqrt()`, `abs()` | `sqrt(x + 10)`, `abs(x)` |
+| **Implicit Mult.** | `n(x)` or `(a)(b)` | `2x`, `5sin(x)`, `(x+1)(x-2)` |
+
+> [!IMPORTANT]
+> **Power Operator Requirement:** The exponent for the `^` operator must always be enclosed in parentheses. For example, use `x^(2)` instead of `x^2`.
 
 --- 
 <div align="center">
