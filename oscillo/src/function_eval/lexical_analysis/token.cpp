@@ -56,7 +56,8 @@ void FunctionToken::print() const {
         case FunctionType::TAN:   std::cout << "[tan]"; break;
         case FunctionType::LOG:   std::cout << "[log]"; break;
         case FunctionType::SQRT:  std::cout << "[sqrt]"; break;
-        case FunctionType::COSEC:  std::cout << "[cosec]"; break;
+        case FunctionType::ABS:  std::cout << "[abs]"; break;
+        case FunctionType::EXP:  std::cout << "[exp]"; break;
         default:                  std::cout << "[unknown]"; break;
     }
     std::cout << '\n';

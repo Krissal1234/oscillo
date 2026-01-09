@@ -21,7 +21,7 @@ Canvas::Canvas(int width, int height) {
 void Canvas::set(int x, int y) {
     int max_px = this->canvas[0].size() * 2;
     int max_py = this->canvas.size() * 4;
-    if (x >= max_px || y >= max_py) return;
+    if (x < 0 || x >= max_px || y < 0 || y >= max_py) return;
 
     this->canvas[y / 4][x / 2] |= pixmap[y % 4][x % 2];
 }

@@ -1,6 +1,6 @@
 #pragma once
 enum class TokenType {VARIABLE, LITERAL, OPERATOR, SEPERATOR, FUNCTION};
-enum class FunctionType {NONE, LOG, SQRT, COS, SIN, TAN, COSEC};
+enum class FunctionType {NONE, LOG, SQRT, COS, SIN, TAN, ABS, EXP};
 enum class OperatorType {NONE, DIVISION, MULTIPLICATION, ADDITION, SUBTRACTION, CARET};
 enum class SeperatorType {NONE, OPEN_BRACKET, CLOSE_BRACKET};
 

@@ -70,6 +70,22 @@ std::vector<Test> tests = {
         {"10 - 2x", 3.0, 4.0},   
         {"2(3)(4)", 0, 24.0},   
         {"x(2x+1)", 2.0, 10.0},
+
+        // Composition: f(g(x))
+        {"sin(cos(0))", 0, 0.84147098}, 
+        {"log(exp(x))", 5.0, 5.0},      
+        
+        // Functions mixed with operators
+        {"2 * sin(0) + 1", 0, 1.0},
+        {"sin(x) + cos(x)", 0, 1.0},   
+        {"sqrt(x * x + 9)", 4.0, 5.0}, 
+        {"abs(x - 10) / 2", 4.0, 3.0}, 
+        {"10 - log(exp(5))", 0, 5.0},
+
+        // Deeply nested complexity
+        {"sqrt(abs(sin(0) - 16))", 0, 4.0},
+        {"2(3 + sin(x/2) * cos(x/2))", 0, 6.0}, 
+        {"exp(log(sqrt(x*x)))", 10.0, 10.0},
 };
 
 for (const Test& t : tests) {

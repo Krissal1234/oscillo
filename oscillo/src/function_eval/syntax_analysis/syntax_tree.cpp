@@ -4,7 +4,6 @@
 #include <cmath>
 Node::~Node() {};
 
-//constructors
 BinOpNode::BinOpNode(std::unique_ptr<Node> left, std::unique_ptr<Node> right, OperatorType op_type) : left(std::move(left)), right(std::move(right)), op_type(op_type) {};
 
 double BinOpNode::evaluate(double x) {
@@ -17,7 +16,7 @@ double BinOpNode::evaluate(double x) {
             case OperatorType::MULTIPLICATION: return left_val * right_val;
             case OperatorType::DIVISION:       
                 if (right_val == 0) {
-                return std::numeric_limits<double>::infinity();
+                    return std::numeric_limits<double>::infinity();
                 }
                 return left_val / right_val;
             default: return 0;
@@ -42,7 +41,8 @@ double FunctionNode::evaluate(double x) {
         case FunctionType::TAN:   return std::tan(inner_value);
         case FunctionType::SQRT:  return std::sqrt(inner_value);
         case FunctionType::LOG:   return std::log(inner_value);
-        case FunctionType::COSEC: return 1 / std::sin(inner_value); //csc = 1/sinx
+        case FunctionType::ABS:   return std::abs(inner_value);
+        case FunctionType::EXP:   return std::exp(inner_value);
         default:
             return 0.0; 
     }

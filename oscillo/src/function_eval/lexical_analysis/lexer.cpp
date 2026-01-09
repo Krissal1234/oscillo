@@ -1,4 +1,3 @@
-#include <iostream>
 #include "lexer.h"
 #include "token_factory.h"
 #include <memory>
@@ -7,7 +6,6 @@
 #include <cctype>
 #include <string>
 
-// static constexpr std::string_view operator_list {"+/-*"};
 static const std::unordered_map<char, OperatorType> operator_list {
     {'+', OperatorType::ADDITION}, 
     {'/', OperatorType::DIVISION},
@@ -21,7 +19,8 @@ static const std::unordered_map<std::string, FunctionType> function_list{
     {"sin", FunctionType::SIN}, 
     {"cos", FunctionType::COS}, 
     {"tan", FunctionType::TAN}, 
-    {"cosec", FunctionType::COSEC} 
+    {"abs", FunctionType::ABS}, 
+    {"exp", FunctionType::EXP}, 
 };
 
 // Constructor
@@ -123,7 +122,6 @@ void Lexer::handle_alpha(char c) { //for now assuming no variable, so we can aut
     //to lower case
     std::transform(alpha_string.begin(), alpha_string.end(), alpha_string.begin(), [](unsigned char c){ return std::tolower(c); });
 
-    std::cout << alpha_string << '\n';
 
     auto got = function_list.find(alpha_string);
 
@@ -150,7 +148,8 @@ void Lexer::tokenise() {
         }
         else if (c == 'x') { //variable to modify
             tokens.push_back(TokenFactory::create_operand(TokenType::VARIABLE, 0.0));
-        } else if (std::isalpha(c)) { // could be trigonmetric func or log
+        } 
+        else if (std::isalpha(c)) { // could be trigonmetric func or log
             handle_alpha(c); //moves pointer
         } 
         else if (c == '(' || c == ')') {

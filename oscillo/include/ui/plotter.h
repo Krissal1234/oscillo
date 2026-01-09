@@ -39,7 +39,6 @@ public:
     void plot_and_render_axes();
     void draw_line(int x0, int y0, int x1, int y1);
     void render();
-    void reset_plot_state();
 
     double get_xmax();
     double get_xmin();
