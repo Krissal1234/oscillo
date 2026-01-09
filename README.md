@@ -37,10 +37,11 @@ Oscillo is a C++ terminal application designed to render mathematical functions 
 | **Root/Misc** | `sqrt()`, `abs()` | `sqrt(x + 10)`, `abs(x)` |
 | **Implicit Mult.** | `n(x)` or `(a)(b)` | `2x`, `5sin(x)`, `(x+1)(x-2)` |
 
+</div>
+
 > [!IMPORTANT]
 > **Power Operator Requirement:** The exponent for the `^` operator must always be enclosed in parentheses. For example, use `x^(2)` instead of `x^2`.
 
-</div>
 
 <div align="center">
   <table border="0">
