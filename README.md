@@ -40,15 +40,16 @@ Oscillo is a C++ terminal application designed to render mathematical functions 
 > [!IMPORTANT]
 > **Power Operator Requirement:** The exponent for the `^` operator must always be enclosed in parentheses. For example, use `x^(2)` instead of `x^2`.
 
---- 
+</div>
+
 <div align="center">
   <table border="0">
     <tr>
       <td>
-        <img src="https://github.com/user-attachments/assets/649fe279-1964-4334-9cfe-3cefb2e3fc0d" width="450" alt="Screenshot 1">
+        <img width="450" alt="Screenshot from 2026-01-09 21-43-39" src="https://github.com/user-attachments/assets/de56c506-92de-443a-9747-58c9f1c79cfa" />
       </td>
       <td>
-        <img src="https://github.com/user-attachments/assets/9ce31f41-59ac-4c17-83a4-3da843e96a1a" width="450" alt="Screenshot 2">
+        <img width="450" alt="Screenshot from 2026-01-09 21-19-04" src="https://github.com/user-attachments/assets/a82c7631-d9be-4f98-b57f-840b030f8c15" />
       </td>
     </tr>
   </table>
