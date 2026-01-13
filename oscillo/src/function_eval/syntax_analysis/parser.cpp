@@ -74,16 +74,12 @@ std::unique_ptr<Node> Parser::parse_power() {
         
         advance(); //eat ^
         
-        if (!peek() || peek()->get_seperator_type() != SeperatorType::OPEN_BRACKET) {
-            throw std::runtime_error("Power operator '^' requires parentheses for the exponent: base^(exp)");
-        }
+        expect_seperator(SeperatorType::OPEN_BRACKET);
         advance(); // eat (
 
         auto right = parse_expression();
 
-        if (!peek() || peek()->get_seperator_type() != SeperatorType::CLOSE_BRACKET) {
-            throw std::runtime_error("Expected ')' after exponent");
-        }
+        expect_seperator(SeperatorType::CLOSE_BRACKET);
 
         advance(); // eat )
 
